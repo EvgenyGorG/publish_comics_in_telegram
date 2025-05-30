@@ -22,6 +22,10 @@ def main():
         comic_book_full_name, comic_book_image_url, directory_for_images
     )
 
+    comic_book_comment = comic_book_info['alt']
+
+    print(comic_book_comment)
+
 
 if __name__ == '__main__':
     main()
