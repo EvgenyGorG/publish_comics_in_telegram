@@ -1,11 +1,21 @@
+import os
 from pathlib import Path
 
 import requests
+import telegram
+from dotenv import load_dotenv
 
 from picture_work_instruments import download_picture, get_file_expansion
 
 
 def main():
+    load_dotenv()
+    tg_bot_token = os.environ['TG_BOT_TOKEN']
+
+    tg_bot = telegram.Bot(tg_bot_token)
+
+    print(tg_bot.send_message())
+
     comic_book_url = 'https://xkcd.com/353/info.0.json'
 
     response_from_comic_book = requests.get(comic_book_url)
@@ -23,8 +33,6 @@ def main():
     )
 
     comic_book_comment = comic_book_info['alt']
-
-    print(comic_book_comment)
 
 
 if __name__ == '__main__':
