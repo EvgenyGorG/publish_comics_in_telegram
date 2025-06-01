@@ -15,10 +15,10 @@ def download_picture(picture_name, picture_url, images_file_path):
         picture.write(response.content)
 
 
-def get_file_expansion(url):
+def get_file_extension(url):
     url_parts = urlparse(url)
     url_path = url_parts.path
     url_name = unquote(split(url_path)[1])
-    file_expansion = splitext(url_name)[1]
+    file_extension = splitext(url_name)[1]
 
-    return file_expansion
+    return file_extension
