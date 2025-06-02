@@ -1,7 +1,6 @@
 from time import sleep
 import os
 import random
-import sys
 from pathlib import Path
 
 import requests
@@ -21,24 +20,16 @@ def get_number_of_comics():
     return comic_book_info['num']
 
 
-def get_env_variable(name, default=None, required=False):
-    value = os.getenv(name, default)
-
-    if required and (value is None or value == ''):
-        print(f'Ошибка: обязательная переменная окружения "{name}" не задана.', file=sys.stderr)
-        sys.exit(1)
-
-    return value
-
-
 def main():
     load_dotenv()
-    tg_bot_token = get_env_variable('TG_BOT_TOKEN', required=True)
-    tg_chat_id = get_env_variable('TG_GROUP_CHAT_ID', required=True)
-    send_time = int(get_env_variable('COMIC_BOOK_SEND_TIME', default=14400))
+    tg_bot_token = os.environ['TG_BOT_TOKEN']
+    tg_chat_id = os.environ['TG_GROUP_CHAT_ID']
+    send_time = int(os.getenv('COMIC_BOOK_SEND_TIME', default=14400))
     tg_bot = telegram.Bot(token=tg_bot_token)
 
     directory_for_images = Path(Path.cwd(), 'Files')
+    Path(directory_for_images).mkdir(parents=True, exist_ok=True)
+
     first_check = True
 
     while True:
@@ -68,8 +59,6 @@ def main():
                 )
             tg_bot.send_message(chat_id=tg_chat_id, text=comic_book_comment)
 
-            Path.unlink(Path(directory_for_images, comic_book_full_name))
-
             sleep(send_time)
 
         except telegram.error.NetworkError:
@@ -78,6 +67,9 @@ def main():
                 sleep(5)
             else:
                 sleep(30)
+
+        finally:
+            Path.unlink(Path(directory_for_images, comic_book_full_name))
 
 
 if __name__ == '__main__':
