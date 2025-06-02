@@ -25,8 +25,11 @@ Python3 должен быть уже установлен. Рекомендуе�
 туториалом о том, как зарегистрировать и получить токен бота, а так же о том, как создать группу или канал в телеграм 
 можно по ссылке [Отложенный постинг](https://smmplanner.com/blog/otlozhennyj-posting-v-telegram/). Обратите внимание,
 `TG_GROUP_CHAT_ID` должна иметь вид `@name_group`.
-Переменная окружения `COMIC_BOOK_SEND_TIME` используется для настройки промежутка времени отправки, укажите целое число.
-По умолчанию используется отправка раз в день.
+Переменная окружения `COMIC_BOOK_SEND_TIME` используется для настройки промежутка времени отправки,
+по умолчанию используется отправка раз в день. Если вы хотите указать свое значение, 
+добавьте переменную в `.env.example` 
+файл в следующем виде: `COMIC_BOOK_SEND_TIME={number_of_seconds}`, где `{number_of_seconds}` 
+количество секунд между отправкой.
 Заполните все переменные окружения в файле `.env.example`, а затем переименуйте файл в `.env`.
 
 ### Запуск скрипта
@@ -69,8 +72,10 @@ they are necessary for the program to work correctly.
 You can find a tutorial on how to register and obtain a bot token, as well as how to create a Telegram group or channel, 
 at [Scheduled Posting](https://smmplanner.com/blog/otlozhennyj-posting-v-telegram/). 
 Note that `TG_GROUP_CHAT_ID` should be in the format `@group_name`.  
-The environment variable `COMIC_BOOK_SEND_TIME` is used to configure the time interval between posts;
-specify an integer value. By default, comics are sent once per day.  
+The environment variable `COMIC_BOOK_SEND_TIME` is used to set the time interval for sending.
+By default, sending is once a day. If you want to specify your value, add the variable to the `.env.example`
+file as follows: `COMIC_BOOK_SEND_TIME={number_of_seconds}`, where `{number_of_seconds}` 
+the number of seconds between sending.  
 Fill in all environment variables in the `.env.example` file, then rename the file to `.env`.
 
 ### Running the Script
